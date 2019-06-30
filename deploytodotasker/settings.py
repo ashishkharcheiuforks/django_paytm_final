@@ -25,9 +25,7 @@ SECRET_KEY = '-jg2ngl7$$ejo!&cr7v^#yxcyggdo#bm4!op3x3m72nnf5#1l0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    'backend-rafi.herokuapp.com',
-    ]
+ALLOWED_HOSTS = []
 
 
 # Application definition
