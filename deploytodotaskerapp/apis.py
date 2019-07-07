@@ -72,6 +72,15 @@ def customer_add_order(request):
         ## Get profile
         customer = access_token.user.customer
 
+        # Check whether customer has any order that is not delivered
+        if Order.objects.filter(customer = customer).exclude(status = Order.DELIVERED):
+            return JsonResponse({"status": "failed", "error": "Your last order must be completed."})
+
+        # Check Address
+        if not request.POST["address"]:
+            return JsonResponse({"status": "failed", "error": "Address is required."})
+
+
         ##get order details        
         order_details = json.loads(request.POST["order_details"])
         order_total=0
@@ -117,6 +126,14 @@ def response(request):
 
         ## Get profile
         customer = access_token.user.customer
+
+        # Check whether customer has any order that is not delivered
+        if Order.objects.filter(customer = customer).exclude(status = Order.DELIVERED):
+            return JsonResponse({"status": "failed", "error": " on Response Your last order must be completed."})
+
+        # Check Address
+        if not request.POST["address"]:
+            return JsonResponse({"status": "failed", "error": "on Response Address is required."})
 
         ## Get Order Details
         order_details = json.loads(request.POST["order_details"])
