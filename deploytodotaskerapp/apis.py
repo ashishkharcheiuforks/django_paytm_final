@@ -60,7 +60,7 @@ def customer_add_order(request):
         params:
             access_token
             registration_id
-            hobby
+            address
             order_details (json format), example:
                 [{"meal_id": 1, "quantity": 2},{"meal_id": 2, "quantity": 3}]
             stripe_token
@@ -94,7 +94,7 @@ def customer_add_order(request):
 
         # Check Address
         if not request.POST["hobby"]:
-            return JsonResponse({"status": "failed", "error": "Address is required."})
+            return JsonResponse({"status": "failed", "error": "hobby is required."})
 
         ##get order details
         order_details = json.loads(request.POST["order_details"])
