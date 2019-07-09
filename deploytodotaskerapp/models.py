@@ -82,8 +82,8 @@ class Order(models.Model):
             str(self.id)
             + " -- "
             + str(self.customer)
-            + " --- "
-            + str(self.status.choices)
+            + " ---> Status of order: "
+            + str(self.status)
         )
 
 
