@@ -3,10 +3,10 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.conf.urls.static import static
 from django.conf import settings
-
+from django.views.generic import TemplateView, RedirectView
 from rest_framework_social_oauth2.views import RevokeTokenView
-
-from deploytodotaskerapp import views, apis
+from allauth.account.views import ConfirmEmailView
+from deploytodotaskerapp import views, apis,imageUpload
 
 
 class MyRevokeTokenView(RevokeTokenView):
@@ -21,6 +21,21 @@ class MyRevokeTokenView(RevokeTokenView):
 
 
 urlpatterns = [
+   # url(r'^image/$', TemplateView.as_view(template_name="image.html"), name='image'),    
+    url(r'^image/upload/$', imageUpload.upload_pic, name='upload_pic'),
+  #  url(r'^$', TemplateView.as_view(template_name="base.html"), name='base'),
+    url(r'^signup/$', TemplateView.as_view(template_name="signup.html"),name='signup'),
+    url(r'^email-verification/$', TemplateView.as_view(template_name="email_verification.html"),name='email-verification'),
+  #  url(r'^login/$', TemplateView.as_view(template_name="login.html"),name='login'),
+   # url(r'^logout/$', TemplateView.as_view(template_name="logout.html"),name='logout'),
+    url(r'^password-reset/$',TemplateView.as_view(template_name="password_reset.html"),name='password-reset'),
+    url(r'^password-reset/confirm/$',TemplateView.as_view(template_name="password_reset_confirm.html"),name='password-reset-confirm'),
+
+    #url(r'^user-details/$',TemplateView.as_view(template_name="user_details.html"),
+     #   name='user-details'),
+    #url(r'^password-change/$',TemplateView.as_view(template_name="password_change.html"),name='password-change'),
+
+    #url(r'^accounts/profile/$', TemplateView.as_view(template_name='profile.html')),
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home, name='home'),
 
@@ -45,13 +60,20 @@ urlpatterns = [
     url(r'^registration/report/$', views.registration_report, name = 'registration-report'),
 
     url(r'^api/social/revoke-token/?$', MyRevokeTokenView.as_view(), name="revoke_token"),
-
+    url(r'^api/registration/order/notification/(?P<last_request_time>.+)/$', apis.registration_order_notification),
+    ##For authentication                     
     # Sign In/ Sign Up/ Sign Out
     url(r'^api/social/', include('rest_framework_social_oauth2.urls')),
+    
     # /convert-token (sign in/ sign up)
     # /revoke-token (sign out)
-    url(r'^api/registration/order/notification/(?P<last_request_time>.+)/$', apis.registration_order_notification),
+    url(r'^rest-auth/registration/account-confirm-email/(?P<key>.+)/$', ConfirmEmailView.as_view(), name='account_confirm_email'),
 
+
+    url(r'^rest-auth/',include('rest_auth.urls')),
+    url(r'^accounts/', include('allauth.urls')),
+
+    url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
 
     # APIs for CUSTOMERS
     url(r'^api/customer/registrations/$', apis.customer_get_registrations),

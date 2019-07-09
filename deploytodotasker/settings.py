@@ -25,7 +25,7 @@ SECRET_KEY = '-jg2ngl7$$ejo!&cr7v^#yxcyggdo#bm4!op3x3m72nnf5#1l0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.101']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -43,6 +43,20 @@ INSTALLED_APPS = [
     'social.apps.django_app.default',
     'rest_framework_social_oauth2',
     'bootstrap3',
+    'django.contrib.sites',
+
+    
+     # The folloing apps are required for allauth:
+    
+    'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth',
+   
+    
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'rest_auth.registration',  
 
 ]
 
@@ -54,6 +68,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware'
 ]
 
 ROOT_URLCONF = 'deploytodotasker.urls'
@@ -126,10 +141,13 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
-
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_ROOT, 'static'),
+)
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 LOGIN_REDIRECT_URL = '/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -139,7 +157,39 @@ import dj_database_url
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
 
+###################Display picture######
+BASE_URL='https://backend-rafi.herokuapp.com'
+DISPLAY_PIC_DEFAULT_URL='https://graph.facebook.com/2008681126092072/picture?type=large'
+####################Basic registration#########
+# Email backend settings for Django
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'#backends.smtp.EmailBackend
+EMAIL_HOST = 'smtp.gmail.com'
+##put yours email
+EMAIL_HOST_USER = ''
+##put your password
+EMAIL_HOST_PASSWORD = ''
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+
+
+#ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True   
+ACCOUNT_USERNAME_REQUIRED = False
+REST_AUTH_SERIALIZERS = {
+  ##  'LOGIN_SERIALIZER': 'path.to.custom.LoginSerializer',
+    'TOKEN_SERIALIZER': 'deploytodotaskerapp.BasicLogin.CustomTokenSerializers',
+    'PASSWORD_RESET_SERIALIZER': 'deploytodotaskerapp.BasicLogin.CustomPasswordResetSerializer'
+}
+REST_AUTH_REGISTER_SERIALIZERS ={
+      'REGISTER_SERIALIZER': 'deploytodotaskerapp.BasicLogin.CustomRegisterSerializers',
+
+}
+
+SITE_ID = 1
 AUTHENTICATION_BACKENDS = (
+   'allauth.account.auth_backends.AuthenticationBackend',
    'social.backends.facebook.FacebookOAuth2',
    'rest_framework_social_oauth2.backends.DjangoOAuth2',
    'django.contrib.auth.backends.ModelBackend',
