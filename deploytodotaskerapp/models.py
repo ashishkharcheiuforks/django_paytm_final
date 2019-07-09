@@ -67,7 +67,7 @@ class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     registration = models.ForeignKey(Registration, on_delete=models.CASCADE)
     driver = models.ForeignKey(Driver, blank=True, null=True, on_delete=models.CASCADE)
-    address = models.CharField(max_length=500)
+    hobby = models.CharField(max_length=500)
     total = models.IntegerField()
     status = models.IntegerField(choices=STATUS_CHOICES)
     created_at = models.DateTimeField(default=timezone.now)
