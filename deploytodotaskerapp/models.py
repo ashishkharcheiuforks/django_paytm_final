@@ -78,7 +78,7 @@ class Order(models.Model):
     picked_at = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
-        return str(self.id)
+        return str(self.id) + " -- " + str(self.STATUS) + " --- "
 
 
 class OrderDetails(models.Model):
