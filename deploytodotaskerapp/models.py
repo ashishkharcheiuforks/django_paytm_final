@@ -83,7 +83,7 @@ class Order(models.Model):
             + " -- "
             + str(self.customer)
             + " --- "
-            + str(self.STATUS_CHOICES)
+            + str(self.status.choices)
         )
 
 
