@@ -1,7 +1,15 @@
 from django.contrib import admin
 
 # Register your models here.
-from deploytodotaskerapp.models import Registration, Customer, Driver, Meal, Order, OrderDetails,PaytmHistory
+from deploytodotaskerapp.models import (
+    Registration,
+    Customer,
+    Driver,
+    Meal,
+    Order,
+    OrderDetails,
+    PaytmHistory,
+)
 
 admin.site.register(Registration)
 admin.site.register(Customer)

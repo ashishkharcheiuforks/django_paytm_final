@@ -110,6 +110,9 @@ class PaytmHistory(models.Model):
     TXNDATE = models.DateTimeField("TXN DATE", default=timezone.now)
     # CURRENCY = models.CharField('CURRENCY', max_length=4, null=True, blank=True)
 
+    def __str__(self):
+        return str(self.ORDERID)
+
     def __unicode__(self):
         return self.STATUS
 
