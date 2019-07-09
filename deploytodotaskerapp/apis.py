@@ -94,7 +94,7 @@ def customer_add_order(request):
 
         # Check Address
         if not request.POST["hobby"]:
-            return JsonResponse({"status": "failed", "error": "Address is required."})
+            return JsonResponse({"status": "failed", "error": "hobby is required."})
 
         ##get order details
         order_details = json.loads(request.POST["order_details"])
@@ -193,7 +193,7 @@ def response(request):
                 registration_id=request.POST["registration_id"],
                 total=order_total,
                 status=Order.COOKING,
-                address=request.POST["hobby"],
+                hobby=request.POST["hobby"],
             )
 
             ## Step 3 - Create Order details

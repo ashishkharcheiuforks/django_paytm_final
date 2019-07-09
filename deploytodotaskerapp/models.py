@@ -22,7 +22,7 @@ class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="customer")
     avatar = models.CharField(max_length=500)
     phone = models.CharField(max_length=500, blank=True)
-    address = models.CharField(max_length=500, blank=True)
+    hobby = models.CharField(max_length=500, blank=True)
 
     def __str__(self):
         return self.user.get_full_name()
@@ -32,7 +32,7 @@ class Driver(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="driver")
     avatar = models.CharField(max_length=500)
     phone = models.CharField(max_length=500, blank=True)
-    address = models.CharField(max_length=500, blank=True)
+    hobby = models.CharField(max_length=500, blank=True)
     location = models.CharField(max_length=500, blank=True)
 
     def __str__(self):
@@ -67,7 +67,7 @@ class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     registration = models.ForeignKey(Registration, on_delete=models.CASCADE)
     driver = models.ForeignKey(Driver, blank=True, null=True, on_delete=models.CASCADE)
-    address = models.CharField(max_length=500)
+    hobby = models.CharField(max_length=500)
     total = models.IntegerField()
     status = models.IntegerField(choices=STATUS_CHOICES)
     created_at = models.DateTimeField(default=timezone.now)
