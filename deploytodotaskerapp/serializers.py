@@ -42,7 +42,7 @@ class OrderCustomerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Customer
-        fields = ("id", "name", "avatar", "phone", "address")
+        fields = ("id", "name", "avatar", "phone", "hobby")
 
 
 class OrderDriverSerializer(serializers.ModelSerializer):
@@ -50,13 +50,13 @@ class OrderDriverSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Customer
-        fields = ("id", "name", "avatar", "phone", "address")
+        fields = ("id", "name", "avatar", "phone", "hobby")
 
 
 class OrderRegistrationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Registration
-        fields = ("id", "name", "phone", "address")
+        fields = ("id", "name", "phone", "hobby")
 
 
 class OrderMealSerializer(serializers.ModelSerializer):
@@ -90,5 +90,5 @@ class OrderSerializer(serializers.ModelSerializer):
             "order_details",
             "total",
             "status",
-            "address",
+            "hobby",
         )
