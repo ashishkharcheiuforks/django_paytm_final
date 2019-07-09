@@ -78,7 +78,7 @@ class Order(models.Model):
     picked_at = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
-        return str(self.id) + " -- " + str(self.customer) + " --- "
+        return str(self.id) + " -- " + str(self.customer) + " --- " + " -- " + str(self.status)
 
 
 class OrderDetails(models.Model):
@@ -116,7 +116,7 @@ class PaytmHistory(models.Model):
 
     def __str__(self):
         return (
-            str(self.order) + " -- " + str(self.STATUS) + " -- " + str(self.TXNAMOUNT)
+            str(self.customer) + " -- " + str(self.STATUS) + " -- " + str(self.TXNAMOUNT)
         )
 
     def __unicode__(self):
