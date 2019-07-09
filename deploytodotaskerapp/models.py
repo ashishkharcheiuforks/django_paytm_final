@@ -111,7 +111,7 @@ class PaytmHistory(models.Model):
     # CURRENCY = models.CharField('CURRENCY', max_length=4, null=True, blank=True)
 
     def __str__(self):
-        return str(self.order + "hello" + self.customer.user.get_full_name)
+        return str(self.order + "hello" + self.customer.hobby)
 
     def __unicode__(self):
         return self.STATUS
