@@ -50,6 +50,10 @@ class Meal(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = "Meal Simple Verbose"
+        verbose_name_plural = "Meal Plural Verbose"
+
 
 class Order(models.Model):
     COOKING = 1
@@ -111,7 +115,7 @@ class PaytmHistory(models.Model):
     # CURRENCY = models.CharField('CURRENCY', max_length=4, null=True, blank=True)
 
     def __str__(self):
-        return str(self.order + "hello")
+        return str(self.order) + str(self.STATUS)
 
     def __unicode__(self):
         return self.STATUS
