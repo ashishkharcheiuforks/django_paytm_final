@@ -4,10 +4,10 @@
 {% block heading %}Registration - Sign In{% endblock %}
 
 {% block content %}
-    <form method="POST">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        <button type="submit" class="btn btn-pink pull-right" href="{% url 'registration-order' %}">Sign In</button>
-    </form>
-    <a href="{% url 'registration-sign-up' %}">Become a Registration</a>
+<form method="POST">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <button type="submit" class="btn btn-pink pull-right" href="{% url 'registration-order' %}">Sign In</button>
+</form>
+<a href="{% url 'registration-sign-up' %}">Become a Registration</a>
 {% endblock %}
