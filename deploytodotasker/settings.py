@@ -159,9 +159,9 @@ EMAIL_BACKEND = (
 )  # backends.smtp.EmailBackend
 EMAIL_HOST = "smtp.gmail.com"
 ##put yours email
-EMAIL_HOST_USER = "mierinflow@gmail.com"
+EMAIL_HOST_USER = "example@gmail.com"
 ##put your password
-EMAIL_HOST_PASSWORD = "A123456p32"
+EMAIL_HOST_PASSWORD = "password"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
