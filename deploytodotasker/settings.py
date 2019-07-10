@@ -136,10 +136,10 @@ USE_TZ = True
 # STATICFILES_STORAGE = "whitenoise.django.GzipManifestStaticFilesStorage"
 # LOGIN_REDIRECT_URL = "/"
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = "/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
