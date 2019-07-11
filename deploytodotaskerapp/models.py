@@ -98,6 +98,10 @@ class OrderDetails(models.Model):
     def __str__(self):
         return str(self.id)
 
+    class Meta:
+        verbose_name = "Order Details Verbose"
+        verbose_name_plural = "Order Details Plural"
+
 
 class PaytmHistory(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
