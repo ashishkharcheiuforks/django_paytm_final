@@ -25,6 +25,7 @@
                     <td>
                         {% for od in order.order_details.all %}
                         {{ od.meal.name }} {{ od.meal.price }}
+                        x {{ od.drink.name }} {{ od.drink.price }}
                         x {{ od.quantity }} = ${{ od.sub_total }}
                         {% endfor %}
                     </td>
