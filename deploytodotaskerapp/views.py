@@ -88,7 +88,7 @@ def registration_edit_meal(request, meal_id):
         if form.is_valid():
             form.save()
             return redirect(registration_meal)
-    return render(request, "registration/edit_meal.html", {"form": form})
+    return render(request, "deploytodotaskerapp/registration/edit_meal.html", {"form": form})
 
 
 @login_required(login_url="/registration/login/")
