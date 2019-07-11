@@ -159,10 +159,10 @@ def response(request):
         order_total = 0
         for meal in order_details:
             order_total += Meal.objects.get(id=meal["meal_id"]).price * meal["quantity"]
-        for drink in order_details:
-            order_total += (
-                Drink.objects.get(id=drink["drink_id"]).price * drink["quantity"]
-            )
+        # for drink in order_details:
+        #     order_total += (
+        #         Drink.objects.get(id=drink["drink_id"]).price * drink["quantity"]
+        #     )
         bill_amount = str(order_total)
 
         ## initialize a dictionary
