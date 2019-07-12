@@ -106,7 +106,9 @@ def customer_add_order(request):
         order_details = json.loads(request.POST["order_details"])
         order_total = 0
         for meal in order_details:
-            order_total += Meal.objects.get(id=meal["meal_id"]).price * meal["quantity"]
+            order_total += (
+                Meal.objects.get(id=meal["meal_id"]).price * meal["quantity"]
+            ) + (Drink.objects.get(id=drink["drink_id"]).price * drink["quantity"])
         # for drink in order_details:
         #     order_total += (
         #         Drink.objects.get(id=drink["drink_id"]).price * drink["quantity"]
@@ -158,7 +160,9 @@ def response(request):
 
         order_total = 0
         for meal in order_details:
-            order_total += Meal.objects.get(id=meal["meal_id"]).price * meal["quantity"]
+            order_total += (
+                Meal.objects.get(id=meal["meal_id"]).price * meal["quantity"]
+            ) + (Drink.objects.get(id=drink["drink_id"]).price * drink["quantity"])
         # for drink in order_details:
         #     order_total += (
         #         Drink.objects.get(id=drink["drink_id"]).price * drink["quantity"]
@@ -203,20 +207,26 @@ def response(request):
                 OrderDetails.objects.create(
                     order=order,
                     meal_id=meal["meal_id"],
+                    drink_id=drink["drink_id"],
                     quantity=meal["quantity"],
-                    sub_total=Meal.objects.get(id=meal["meal_id"]).price
-                    * meal["quantity"],
+                    sub_total=(
+                        Meal.objects.get(id=meal["meal_id"]).price * meal["quantity"]
+                    )
+                    + (
+                        Drink.objects.get(id=drink["drink_id"]).price
+                        * drink["quantity"]
+                    ),
                 )
 
             # ## Step 3 - Create Order details
-            for drink in order_details:
-                OrderDetails.objects.create(
-                    order=order,
-                    drink_id=drink["drink_id"],
-                    quantity=drink["quantity"],
-                    sub_total=Drink.objects.get(id=drink["drink_id"]).price
-                    * drink["quantity"],
-                )    
+            # for drink in order_details:
+            #     OrderDetails.objects.create(
+            #         order=order,
+            #         drink_id=drink["drink_id"],
+            #         quantity=drink["quantity"],
+            #         sub_total=Drink.objects.get(id=drink["drink_id"]).price
+            #         * drink["quantity"],
+            #     )
             ## step 4 save the payment
             PaytmHistory.objects.create(customer=customer, order=order, **pay_res)
             return JsonResponse(back_response)
