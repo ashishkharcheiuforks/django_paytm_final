@@ -150,7 +150,7 @@ db_from_env = dj_database_url.config()
 DATABASES["default"].update(db_from_env)
 
 ###################Display picture######
-BASE_URL = "https://eightmaster.herokuapp.com"
+BASE_URL = "https://eightmaster.herokuapp.com/"
 DISPLAY_PIC_DEFAULT_URL = "https://i.imgur.com/YoOns3Y.png"
 ####################Basic registration#########
 # Email backend settings for Django
