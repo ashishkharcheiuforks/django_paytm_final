@@ -161,7 +161,7 @@ EMAIL_HOST = "smtp.gmail.com"
 ##put yours email
 EMAIL_HOST_USER = "mierinflow@gmail.com"
 ##put your password
-EMAIL_HOST_PASSWORD = "A123456z"
+EMAIL_HOST_PASSWORD = "A123456p32"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
