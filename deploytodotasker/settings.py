@@ -25,7 +25,7 @@ SECRET_KEY = "-jg2ngl7$$ejo!&cr7v^#yxcyggdo#bm4!op3x3m72nnf5#1l0"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['eightmaster.herokuapp.com']
+ALLOWED_HOSTS = ['terracehouse.herokuapp.com']
 
 
 # Application definition
@@ -150,7 +150,7 @@ db_from_env = dj_database_url.config()
 DATABASES["default"].update(db_from_env)
 
 ###################Display picture######
-BASE_URL = "https://eightmaster.herokuapp.com/"
+BASE_URL = "https://terracehouse.herokuapp.com/"
 DISPLAY_PIC_DEFAULT_URL = "https://i.imgur.com/YoOns3Y.png"
 ####################Basic registration#########
 # Email backend settings for Django
