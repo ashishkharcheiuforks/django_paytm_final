@@ -106,7 +106,12 @@ def customer_add_order(request):
         order_details = json.loads(request.POST["order_details"])
         order_total = 0
         for meal in order_details:
-            order_total += Meal.objects.get(id=meal["meal_id"]).price * meal["quantity"]
+            order_total += (
+                Meal.objects.get(id=meal["meal_id"]).price * meal["quantity"],
+            )
+            order_total += (
+                Drink.objects.get(id=drink["drink_id"]).price * drink["quantity"]
+            )
 
         # for drink in order_details:
         #     order_total += (
@@ -159,7 +164,12 @@ def response(request):
 
         order_total = 0
         for meal in order_details:
-            order_total += Meal.objects.get(id=meal["meal_id"]).price * meal["quantity"]
+            order_total += (
+                Meal.objects.get(id=meal["meal_id"]).price * meal["quantity"],
+            )
+            order_total += (
+                Drink.objects.get(id=drink["drink_id"]).price * drink["quantity"]
+            )
             # + (Drink.objects.get(id=drink["drink_id"]).price * drink["quantity"])
 
         # for drink in order_details:
@@ -210,6 +220,8 @@ def response(request):
                     quantity=meal["quantity"],
                     sub_total=(
                         Meal.objects.get(id=meal["meal_id"]).price * meal["quantity"]
+                        + Drink.objects.get(id=drink["drink_id"]).price
+                        * drink["quantity"]
                     )
                     # + (
                     #     Drink.objects.get(id=drink["drink_id"]).price
