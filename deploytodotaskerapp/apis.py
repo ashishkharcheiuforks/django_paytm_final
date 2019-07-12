@@ -209,14 +209,14 @@ def response(request):
                 )
 
             ## Step 3 - Create Order details
-            for drink in order_details:
-                OrderDetails.objects.create(
-                    order=order,
-                    drink_id=drink["drink_id"],
-                    quantity=drink["quantity"],
-                    sub_total=Drink.objects.get(id=drink["drink_id"]).price
-                    * drink["quantity"],
-                )    
+            # for drink in order_details:
+            #     OrderDetails.objects.create(
+            #         order=order,
+            #         drink_id=drink["drink_id"],
+            #         quantity=drink["quantity"],
+            #         sub_total=Drink.objects.get(id=drink["drink_id"]).price
+            #         * drink["quantity"],
+            #     )    
             ## step 4 save the payment
             PaytmHistory.objects.create(customer=customer, order=order, **pay_res)
             return JsonResponse(back_response)
