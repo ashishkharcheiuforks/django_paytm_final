@@ -120,19 +120,19 @@ def registration_edit_meal(request, meal_id):
     return render(request, "deploytodotaskerapp/registration/edit_meal.html", {"form": form})
 
 
-# @login_required(login_url="/registration/login/")
-# def registration_edit_drink(request, drink_id):
-#     form = DrinkForm(instance=Drink.objects.get(id=drink_id))
+@login_required(login_url="/registration/login/")
+def registration_edit_drink(request, drink_id):
+    form = DrinkForm(instance=Drink.objects.get(id=drink_id))
 
-#     if request.method == "POST":
-#         form = DrinkForm(
-#             request.POST, request.FILES, instance=Drink.objects.get(id=drink_id)
-#         )
+    if request.method == "POST":
+        form = DrinkForm(
+            request.POST, request.FILES, instance=Drink.objects.get(id=drink_id)
+        )
 
-#         if form.is_valid():
-#             form.save()
-#             return redirect(registration_drink)
-#     return render(request, "deploytodotaskerapp/registration/edit_drink.html", {"form": form})
+        if form.is_valid():
+            form.save()
+            return redirect(registration_drink)
+    return render(request, "deploytodotaskerapp/registration/edit_drink.html", {"form": form})
 
 
 @login_required(login_url="/registration/login/")

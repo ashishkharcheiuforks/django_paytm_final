@@ -86,7 +86,7 @@ class OrderDrinkSerializer(serializers.ModelSerializer):
 
 class OrderDetailsSerializer(serializers.ModelSerializer):
     meal = OrderMealSerializer()
-    # drink = OrderDrinkSerializer()
+    drink = OrderDrinkSerializer()
 
 
 class OrderSerializer(serializers.ModelSerializer):
