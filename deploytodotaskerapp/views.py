@@ -6,12 +6,11 @@ from deploytodotaskerapp.forms import (
     RegistrationForm,
     UserFormForEdit,
     MealForm,
-    DrinkForm,
 )
 from django.contrib.auth import authenticate, login
 
 from django.contrib.auth.models import User
-from deploytodotaskerapp.models import Meal, Drink, Order, Driver
+from deploytodotaskerapp.models import Meal, Order, Driver
 
 from django.db.models import Sum, Count, Case, When
 
@@ -60,16 +59,6 @@ def registration_meal(request):
 
 
 @login_required(login_url="/registration/login/")
-def registration_drink(request):
-    drinks = Drink.objects.filter(registration=request.user.registration).order_by(
-        "-id"
-    )
-    return render(
-        request, "deploytodotaskerapp/registration/drink.html", {"drinks": drinks}
-    )
-
-
-@login_required(login_url="/registration/login/")
 def registration_add_meal(request):
     form = MealForm()
 
@@ -88,24 +77,6 @@ def registration_add_meal(request):
 
 
 @login_required(login_url="/registration/login/")
-def registration_add_drink(request):
-    form = DrinkForm()
-
-    if request.method == "POST":
-        form = DrinkForm(request.POST, request.FILES)
-
-        if form.is_valid():
-            drink = form.save(commit=False)
-            drink.registration = request.user.registration
-            drink.save()
-            return redirect(registration_drink)
-
-    return render(
-        request, "deploytodotaskerapp/registration/add_drink.html", {"form": form}
-    )
-
-
-@login_required(login_url="/registration/login/")
 def registration_edit_meal(request, meal_id):
     form = MealForm(instance=Meal.objects.get(id=meal_id))
 
@@ -118,21 +89,6 @@ def registration_edit_meal(request, meal_id):
             form.save()
             return redirect(registration_meal)
     return render(request, "deploytodotaskerapp/registration/edit_meal.html", {"form": form})
-
-
-@login_required(login_url="/registration/login/")
-def registration_edit_drink(request, drink_id):
-    form = DrinkForm(instance=Drink.objects.get(id=drink_id))
-
-    if request.method == "POST":
-        form = DrinkForm(
-            request.POST, request.FILES, instance=Drink.objects.get(id=drink_id)
-        )
-
-        if form.is_valid():
-            form.save()
-            return redirect(registration_drink)
-    return render(request, "deploytodotaskerapp/registration/edit_drink.html", {"form": form})
 
 
 @login_required(login_url="/registration/login/")
@@ -201,18 +157,6 @@ def registration_report(request):
         "data": [meal.total_order or 0 for meal in top3_meals],
     }
 
-    # Top 3 Drinks
-    top3_drinks = (
-        Drink.objects.filter(registration=request.user.registration)
-        .annotate(total_order=Sum("orderdetails__quantity"))
-        .order_by("-total_order")[:3]
-    )
-
-    drink = {
-        "labels": [drink.name for drink in top3_drinks],
-        "data": [drink.total_order or 0 for drink in top3_drinks],
-    }
-
     # Top 3 Drivers
     top3_drivers = Driver.objects.annotate(
         total_order=Count(
@@ -228,13 +172,7 @@ def registration_report(request):
     return render(
         request,
         "deploytodotaskerapp/registration/report.html",
-        {
-            "revenue": revenue,
-            "orders": orders,
-            "meal": meal,
-            "drink": drink,
-            "driver": driver,
-        },
+        {"revenue": revenue, "orders": orders, "meal": meal, "driver": driver},
     )
 
 

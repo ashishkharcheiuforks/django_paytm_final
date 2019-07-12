@@ -1,8 +1,7 @@
 from django import forms
 
 from django.contrib.auth.models import User
-from deploytodotaskerapp.models import Registration, Meal, Drink, ImageStore
-
+from deploytodotaskerapp.models import Registration, Meal,ImageStore
 
 class UserForm(forms.ModelForm):
     email = forms.CharField(max_length=100, required=True)
@@ -12,7 +11,6 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ("username", "password", "first_name", "last_name", "email")
 
-
 class UserFormForEdit(forms.ModelForm):
     email = forms.CharField(max_length=100, required=True)
 
@@ -20,27 +18,17 @@ class UserFormForEdit(forms.ModelForm):
         model = User
         fields = ("first_name", "last_name", "email")
 
-
 class RegistrationForm(forms.ModelForm):
     class Meta:
         model = Registration
         fields = ("name", "phone", "address", "logo")
-
 
 class MealForm(forms.ModelForm):
     class Meta:
         model = Meal
         exclude = ("registration",)
 
-
-class DrinkForm(forms.ModelForm):
-    class Meta:
-        model = Drink
-        exclude = ("registration",)
-
-
 class ImageUploadForm(forms.Form):
     """Image upload form."""
-
-    token = forms.CharField(required=True)
+    token= forms.CharField(required=True)
     image = forms.ImageField()

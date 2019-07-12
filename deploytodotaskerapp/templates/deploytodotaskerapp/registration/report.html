@@ -109,39 +109,6 @@
             </div>
         </div>
 
-        <!-- TOP 3 Drinks -->
-        <div class="panel">
-            <div class="panel-heading bg-blue">
-                <h4 class="panel-title text-center text-white">
-                    Top 3 Drinks
-                </h4>
-            </div>
-            <div class="panel-body">
-                <canvas id="drinkChart" height="242"></canvas>
-                <script>
-                    var ctx = document.getElementById("drinkChart").getContext("2d");
-                    var data = {
-                        labels: {{ drink.labels| safe }},
-                    datasets: [
-                        {
-                            backgroundColor: [
-                                "#36A2EB", "#FFCE56", "#FF6384"
-                            ],
-                            data: {{ drink.data }}
-                              }
-                    ]
-                      };
-
-                    new Chart(ctx, {
-                        type: 'pie',
-                        data: data
-                    });
-
-                </script>
-            </div>
-        </div>
-
-
         <!-- TOP 3 Driver ALL TIME -->
         <div class="panel">
             <div class="panel-heading bg-blue">
