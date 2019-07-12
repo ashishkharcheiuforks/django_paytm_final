@@ -25,7 +25,7 @@ SECRET_KEY = "-jg2ngl7$$ejo!&cr7v^#yxcyggdo#bm4!op3x3m72nnf5#1l0"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['paytmdrink.herokuapp.com']
 
 
 # Application definition
@@ -150,7 +150,7 @@ db_from_env = dj_database_url.config()
 DATABASES["default"].update(db_from_env)
 
 ###################Display picture######
-BASE_URL = "http://46.101.192.46"
+BASE_URL = "https://paytmdrink.herokuapp.com"
 DISPLAY_PIC_DEFAULT_URL = "https://i.imgur.com/YoOns3Y.png"
 ####################Basic registration#########
 # Email backend settings for Django
@@ -159,9 +159,9 @@ EMAIL_BACKEND = (
 )  # backends.smtp.EmailBackend
 EMAIL_HOST = "smtp.gmail.com"
 ##put yours email
-EMAIL_HOST_USER = "example@gmail.com"
+EMAIL_HOST_USER = "mierinflow@gmail.com"
 ##put your password
-EMAIL_HOST_PASSWORD = "password"
+EMAIL_HOST_PASSWORD = "A123456z"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
